@@ -20,5 +20,6 @@ from ClassQuery import views as class_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', class_views.test)
+    url(r'^$', class_views.getimages),
+    # url(r'^section/$', class_views.getimages)
 ]
