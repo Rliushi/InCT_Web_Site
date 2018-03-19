@@ -3,8 +3,8 @@
     <meta charset="UTF-8">
     <title>Test</title>
 </head>
-    {% for i in image_info %}
-        <img src={{ i }}  alt="" />
+    {% for image in image_info %}
+        <img src={{ image.imagePath }}  alt="" />
         <br>
     {% endfor %}
 </body>
