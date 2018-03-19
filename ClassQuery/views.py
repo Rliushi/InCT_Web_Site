@@ -9,7 +9,7 @@ def index(request):
 
 
 def test(request):
-    return render(request, 'HiMath7_1.html')
+    return render(request, 'ClassQuery/HiMath7_1.html')
 
 
 def getimages(request):
@@ -20,5 +20,5 @@ def getimages(request):
         image_info = list()
         for i in range(count):
             image_info.append("static/images/" + section_id + "/" + section_id.replace("section_", "") + "-" + str(i + 1) + ".png")
-        return render(request, 'HiMath7_1.html', {'image_info': image_info})
+        return render(request, 'ClassQuery/HiMath7_1.html', {'image_info': image_info})
 
