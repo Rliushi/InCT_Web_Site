@@ -33,7 +33,8 @@ def xjh(request):
 
 def getimages(request):
     section_id = request.GET['section']
-    image_info = ClassImage.objects.filter(sectionID=section_id).order_by('imageSeq')
+    class_name = request.GET['class']
+    image_info = ClassImage.objects.filter(className=class_name).filter(sectionID=section_id).order_by('imageSeq')
 
     return render(request, 'ClassQuery/HiMath7_1.html', {'image_info': image_info})
 
