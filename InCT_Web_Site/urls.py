@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^$', class_views.getimages),
     url(r'^xjh$', class_views.xjh),
     url(r'^xjh_q$', class_views.xjh_query),
+    url(r'^select_school$', class_views.get_school),
     # url(r'^section/$', class_views.getimages)
 ]

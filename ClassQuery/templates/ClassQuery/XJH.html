@@ -1,0 +1,92 @@
+{%  load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>"宣讲会查询"</title>
+    <script src="{% static 'js/jquery-3.3.1.js'%}"></script>
+    <link rel="stylesheet" href="{%static  'css/Inct_Css.css'%}" type="text/css">
+</head>
+<body>
+<script>
+
+    $(document).ready(function(){
+        $.ajaxSettings.async = false
+        get_school()
+        $.ajaxSettings.async = true
+        ajax_xjh()
+    })
+
+    function ajax_xjh() {
+        var selcity = document.getElementById('CitySelection').value
+        var school_engname = document.getElementById('SchoolSelection').value
+        $("#tab tr:not(:first)").empty();
+        $.getJSON('/xjh_q', {'city' : selcity, 'school' : school_engname}, function (res) {
+            for (var i = 0; i < res.length; i++)
+            {
+                var tmp_tr = "<tr>" + "<td>" + res[i]['city'] + "</td>" + "<td>" + res[i]['school'] + "</td>" + "<td>" + res[i]['company'] + "</td>" + "<td>" + res[i]['location'] + "</td>" + "<td>" +  res[i]['time']+ "</td>" + "</tr>"
+
+                $('#tab tbody').append(tmp_tr)
+            }
+        })
+    }
+    
+    function get_school() {
+        var selcity = document.getElementById('CitySelection').value
+        $("#SchoolSelection").empty()
+        $.getJSON('/select_school', {'city' : selcity},  function (res) {
+            for (var i = 0; i < res.length; i++)
+            {
+                $("#SchoolSelection").append("<option value= '" + res[i]['school_engname'] + "'>" + res[i]['school'] + "</option>")
+            }
+        })
+    }
+    </script>
+
+<form>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <label class="yellow">请选择城市：</label>
+                </td>
+                <td>
+                        <select  id="CitySelection" onchange="get_school()" style="font-size: 16px">
+        <option value="xj">乌鲁木齐</option>
+        <option value="js">江苏</option>
+    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="yellow">请选择学校：</label>
+                </td>
+                <td>
+                    <select  id="SchoolSelection" onchange="ajax_xjh()" style="font-size: 16px">
+                        </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <table id="tab" class="imagetable">
+        <thead>
+        <tr>
+            <th>城市
+            </th>
+            <th>学校
+            </th>
+            <th>公司
+            </th>
+            <th>地址
+            </th>
+            <th>时间
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

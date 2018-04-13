@@ -20,3 +20,4 @@ class XjhInfo(models.Model):
     company = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     time = models.CharField(max_length=14)
+    school_engname = models.CharField(max_length=50, default='noname')
